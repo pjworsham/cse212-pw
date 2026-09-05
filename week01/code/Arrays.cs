@@ -13,7 +13,22 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // ************************************************************
+        //       Plan of how to implement the multiplesOf function
+        // ************************************************************
+        // 1. create an array that has a length of 5 which is the length given
+        // 2. use a loop to go through the array one by one
+        // 3. multiply the number by each length of the numbers starting with 1 and going until you have reached 5 since 5 is the length
+        // 4. each number needs to be stored in the array
+        // 5. return once the array has completed
+
+        double[] multiples = new double[length];
+
+        for (int i = 0; i < length; i++)
+        {
+            multiples[i] = number * (i + 1);
+        }
+        return multiples; // replace this return statement with your own
     }
 
     /// <summary>
