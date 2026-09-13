@@ -6,9 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 public class PriorityQueueTests
 {
     [TestMethod]
-    // Scenario: This will add items with different priorities
-    // Expected Result: The item with the highest priority should be removed first
-    // Defect(s) Found: 
+    // Scenario: Add three items with different priorities, with the highest priority item added last.
+    // Expected Result: The item with the highest priority, C, should be removed first
+    // Defect(s) Found: The last item in the queue was not being checked
+    // Changed _queue.Count -1 to _queue.Count so all items are checked
      public void TestPriorityQueue_1()
     {
         var priorityQueue = new PriorityQueue();
@@ -21,9 +22,10 @@ public class PriorityQueueTests
     }
 
     [TestMethod]
-    // Scenario: Add multiple items where two have the same highest priority
-    // Expected Result: The first item added with the highest priority should be removed first
-    // Defect(s) Found: 
+    // Scenario: Add two items with the same highest priority, with A added before B.
+    // Expected Result: A should be removed before B because equal priorities follow FIFO order.
+    // Defect(s) Found: The >= caused the later item with the same priority
+    // to be selected. Changed >= to > so equal priorities follow FIFO
       public void TestPriorityQueue_2()
     {
         var priorityQueue = new PriorityQueue();
@@ -36,9 +38,10 @@ public class PriorityQueueTests
     }
 
      [TestMethod]
-    // Scenario: Remove the highest priority item, then remove another item
-    // Expected Result: The first item removed should no longer be in the queue
-    // Defect(s) Found: 
+    // Scenario: Add three items, remove the hightest priority item, then remove another item.
+    // Expected Result: B should be removed first, and C should be removed second.
+    // Defect(s) Found: Dequeue returned the highest priority item but did not remove it from the
+    // queue. Added_RemoveAt(highPriorityIndex) before returning the value
       public void TestPriorityQueue_3()
     {
         var priorityQueue = new PriorityQueue();
@@ -54,7 +57,8 @@ public class PriorityQueueTests
      [TestMethod]
     // Scenario: Try to dequeue from an empty queue
     // Expected Result: An InvalidOperationException should be thrown with the message "The queue is empty"
-    // Defect(s) Found: 
+    // Defect(s) Found: The correct InvaidOperationException 
+    // with the message "The queue is empty. "was already being thrown
      public void TestPriorityQueue_4()
     {
         var priorityQueue = new PriorityQueue();
