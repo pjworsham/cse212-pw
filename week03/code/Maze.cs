@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 /// <summary>
 /// Defines a maze using a dictionary. The dictionary is provided by the
 /// user when the Maze object is created. The dictionary will contain the
@@ -32,8 +34,17 @@ public class Maze
     /// </summary>
     public void MoveLeft()
     {
-        // FILL IN CODE
+        // FILL IN CODE  
+        if (_mazeMap.TryGetValue((_currX, _currY), out bool[] directions) && directions[0]) 
+        {
+            _currX--;
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
+    
 
     /// <summary>
     /// Check to see if you can move right.  If you can, then move.  If you
@@ -41,8 +52,17 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        // FILL IN CODE  
+        if (_mazeMap.TryGetValue((_currX, _currY), out bool[] directions) && directions[1]) 
+        {
+            _currX++;
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
+    
 
     /// <summary>
     /// Check to see if you can move up.  If you can, then move.  If you
@@ -51,7 +71,16 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+         if (_mazeMap.TryGetValue((_currX, _currY), out bool[] directions) && directions[2]) 
+        {
+            _currY--;
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
+    
 
     /// <summary>
     /// Check to see if you can move down.  If you can, then move.  If you
@@ -60,8 +89,16 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
+         if (_mazeMap.TryGetValue((_currX, _currY), out bool[] directions) && directions[3]) 
+        {
+            _currY++;
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
-
+   
     public string GetStatus()
     {
         return $"Current location (x={_currX}, y={_currY})";
